@@ -1,12 +1,15 @@
 package com.jla.modelviewpresenter.data.db;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.jla.modelviewpresenter.data.model.ConfigurationResponse;
 import com.jla.modelviewpresenter.data.model.FilmResponse;
+import com.jla.modelviewpresenter.data.model.ImagesResponse;
 
 import java.sql.SQLException;
 
@@ -16,6 +19,12 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     private Dao<FilmResponse, Integer> filmResponseDao;
+    private Dao<ConfigurationResponse, Integer> configurationResponseDao;
+    private Dao<ImagesResponse, Integer> imagesResponseDao;
+
+    public DbHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
@@ -35,5 +44,19 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
             filmResponseDao = getDao(FilmResponse.class);
         }
         return filmResponseDao;
+    }
+
+    public Dao<ConfigurationResponse, Integer> geConfigurationResponseDao() throws SQLException {
+        if (configurationResponseDao == null) {
+            configurationResponseDao = getDao(ConfigurationResponse.class);
+        }
+        return configurationResponseDao;
+    }
+
+    public Dao<ImagesResponse, Integer> getImagesResponseDao() throws SQLException {
+        if (imagesResponseDao == null) {
+            imagesResponseDao = getDao(ImagesResponse.class);
+        }
+        return imagesResponseDao;
     }
 }

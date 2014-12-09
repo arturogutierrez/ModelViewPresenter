@@ -3,6 +3,8 @@ package com.jla.modelviewpresenter.data.model;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.util.Date;
+
 @DatabaseTable
 public class FilmResponse {
 
@@ -16,6 +18,7 @@ public class FilmResponse {
     private static final String TITLE = "title";
     private static final String VOTE_AVERAGE = "voteAverage";
     private static final String VOTE_COUNT = "voteCount";
+    private static final String UPDATED_AT = "updatedAt";
 
     @DatabaseField(columnName = ADULT)
     private boolean adult;
@@ -37,8 +40,13 @@ public class FilmResponse {
     private double vote_average;
     @DatabaseField(columnName = VOTE_COUNT)
     private int vote_count;
+    @DatabaseField(columnName = UPDATED_AT)
+    private Date updated_at;
 
-    public FilmResponse(boolean adult, String backdropPath, int id, String originalTitle, String releaseDate, String posterPath, double popularity, String title, double voteAverage, int voteCount) {
+    public FilmResponse() {
+    }
+
+    public FilmResponse(boolean adult, String backdropPath, int id, String originalTitle, String releaseDate, String posterPath, double popularity, String title, double voteAverage, int voteCount, Date updatedAt) {
         this.adult = adult;
         this.backdrop_path = backdropPath;
         this.id = id;
@@ -49,6 +57,7 @@ public class FilmResponse {
         this.title = title;
         this.vote_average = voteAverage;
         this.vote_count = voteCount;
+        this.updated_at = updatedAt;
     }
 
     public boolean isAdult() {
@@ -129,5 +138,13 @@ public class FilmResponse {
 
     public void setVoteCount(int voteCount) {
         this.vote_count = voteCount;
+    }
+
+    public Date getUpdatedAt() {
+        return updated_at;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updated_at = updatedAt;
     }
 }

@@ -1,11 +1,13 @@
 package com.jla.modelviewpresenter.view.filmList.module;
 
+import android.content.Context;
+
 import com.jla.modelviewpresenter.data.repository.FilmRepository;
 import com.jla.modelviewpresenter.data.repository.FilmRepositoryImpl;
+import com.jla.modelviewpresenter.domain.bus.MainThreadBus;
 import com.jla.modelviewpresenter.domain.interactor.PopulatePopularFilmsInteractor;
 import com.jla.modelviewpresenter.domain.interactor.PopulatePopularFilmsInteractorImpl;
 import com.jla.modelviewpresenter.domain.job.GetPopularFilmsJob;
-import com.jla.modelviewpresenter.domain.bus.MainThreadBus;
 import com.jla.modelviewpresenter.view.filmList.presenter.FilmListPresenter;
 import com.jla.modelviewpresenter.view.filmList.presenter.FilmListPresenterImpl;
 import com.jla.modelviewpresenter.view.filmList.view.FilmListActivity;
@@ -36,8 +38,8 @@ public class FilmListModule {
 
     @Provides
     @Singleton
-    public FilmRepository provideFilmRepository() {
-        return new FilmRepositoryImpl();
+    public FilmRepository provideFilmRepository(Context context) {
+        return new FilmRepositoryImpl(context);
     }
 
     @Provides
