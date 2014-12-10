@@ -2,6 +2,11 @@ package com.jla.modelviewpresenter.view.filmList.module;
 
 import android.content.Context;
 
+import com.jla.modelviewpresenter.data.cache.ConfigurationResponseCache;
+import com.jla.modelviewpresenter.data.cache.ConfigurationResponseCacheImpl;
+import com.jla.modelviewpresenter.data.cache.FilmResponseCache;
+import com.jla.modelviewpresenter.data.cache.FilmResponseCacheImpl;
+import com.jla.modelviewpresenter.data.model.ConfigurationResponse;
 import com.jla.modelviewpresenter.data.repository.FilmRepository;
 import com.jla.modelviewpresenter.data.repository.FilmRepositoryImpl;
 import com.jla.modelviewpresenter.domain.bus.MainThreadBus;
@@ -38,8 +43,20 @@ public class FilmListModule {
 
     @Provides
     @Singleton
-    public FilmRepository provideFilmRepository(Context context) {
-        return new FilmRepositoryImpl(context);
+    public FilmResponseCache provideFilmResponseCache(Context context) {
+        return new FilmResponseCacheImpl(context);
+    }
+
+    @Provides
+    @Singleton
+    public ConfigurationResponseCache provideConfigurationResponseCache(Context context) {
+        return new ConfigurationResponseCacheImpl(context);
+    }
+
+    @Provides
+    @Singleton
+    public FilmRepository provideFilmRepository(FilmResponseCache filmResponseCache, ConfigurationResponseCache configurationResponseCache) {
+        return new FilmRepositoryImpl(filmResponseCache, configurationResponseCache);
     }
 
     @Provides

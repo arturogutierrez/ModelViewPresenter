@@ -30,6 +30,8 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
             TableUtils.createTable(connectionSource, FilmResponse.class);
+            TableUtils.createTable(connectionSource, ConfigurationResponse.class);
+            TableUtils.createTable(connectionSource, ImagesResponse.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,7 +48,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
         return filmResponseDao;
     }
 
-    public Dao<ConfigurationResponse, Integer> geConfigurationResponseDao() throws SQLException {
+    public Dao<ConfigurationResponse, Integer> getConfigurationResponseDao() throws SQLException {
         if (configurationResponseDao == null) {
             configurationResponseDao = getDao(ConfigurationResponse.class);
         }

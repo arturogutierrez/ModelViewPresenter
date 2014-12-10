@@ -1,5 +1,6 @@
 package com.jla.modelviewpresenter.data.model;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -21,15 +22,15 @@ public class ImagesResponse {
     private String base_url;
     @DatabaseField(columnName = SECURE_BASE_URL)
     private String secure_base_url;
-    @DatabaseField(columnName = BACKDROP_SIZES)
+    @DatabaseField(columnName = BACKDROP_SIZES, dataType = DataType.SERIALIZABLE)
     private String[] backdrop_sizes;
-    @DatabaseField(columnName = LOGO_SIZES)
+    @DatabaseField(columnName = LOGO_SIZES, dataType = DataType.SERIALIZABLE)
     private String[] logo_sizes;
-    @DatabaseField(columnName = POSTER_SIZES)
+    @DatabaseField(columnName = POSTER_SIZES, dataType = DataType.SERIALIZABLE)
     private String[] poster_sizes;
-    @DatabaseField(columnName = PROFILE_SIZES)
+    @DatabaseField(columnName = PROFILE_SIZES, dataType = DataType.SERIALIZABLE)
     private String[] profile_sizes;
-    @DatabaseField(columnName = STILL_SIZES)
+    @DatabaseField(columnName = STILL_SIZES, dataType = DataType.SERIALIZABLE)
     private String[] still_sizes;
 
     public ImagesResponse() {
