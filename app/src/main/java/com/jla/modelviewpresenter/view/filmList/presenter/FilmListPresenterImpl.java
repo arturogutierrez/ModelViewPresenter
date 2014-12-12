@@ -6,21 +6,20 @@ import com.jla.modelviewpresenter.domain.bus.MainThreadBus;
 import com.jla.modelviewpresenter.view.filmList.view.FilmListView;
 import com.squareup.otto.Subscribe;
 
+import javax.inject.Inject;
+
 public class FilmListPresenterImpl implements FilmListPresenter {
 
-    private FilmListView filmListView;
-    private PopulatePopularFilmsInteractor populatePopularFilmsInteractor;
-    private MainThreadBus bus;
-
-    public FilmListPresenterImpl(FilmListView filmListView, PopulatePopularFilmsInteractor populatePopularFilmsInteractor, MainThreadBus bus) {
-        this.filmListView = filmListView;
-        this.populatePopularFilmsInteractor = populatePopularFilmsInteractor;
-        this.bus = bus;
-        this.bus.register(this);
-    }
+    @Inject
+    FilmListView filmListView;
+    @Inject
+    PopulatePopularFilmsInteractor populatePopularFilmsInteractor;
+    @Inject
+    MainThreadBus bus;
 
     @Override
     public void onResume() {
+        bus.register(this);
         filmListView.showProgress();
         populatePopularFilmsInteractor.populatePopularFilms();
     }

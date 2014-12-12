@@ -52,7 +52,7 @@ public class FilmListModule {
 
     @Provides
     @Singleton
-    public FilmListPresenter providePresenter(FilmListView filmListView, PopulatePopularFilmsInteractor populatePopularFilmsInteractor, MainThreadBus bus) {
-        return new FilmListPresenterImpl(filmListView, populatePopularFilmsInteractor, bus);
+    public FilmListPresenter providePresenter(final FilmListPresenterImpl presenter) {
+        return presenter;
     }
 }
